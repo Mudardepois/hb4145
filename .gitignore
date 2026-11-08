@@ -1,0 +1,23 @@
+# Ambientes virtuais (criar localmente em cada máquina/usuário)
+.venv/
+.venv-host/
+venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+
+# PyCharm / IDE
+.idea/
+*.iml
+
+# Pastas de medidas geradas pelo script (YYYYMMDD_HHMMSS_Nome)
+20[0-9][0-9][0-9][0-9][0-9][0-9]_*/
+
+# Arquivos de teste locais
+temp.py
+
+# Sistema
+.DS_Store

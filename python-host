@@ -1,0 +1,21 @@
+#!/bin/sh
+# Ponte para o PyCharm Flatpak executar o Python do HOST (Fedora).
+#
+# O PyCharm Flatpak nao consegue usar /usr/lib64/libiovisa.so nem o Python
+# do host diretamente, porque dentro do sandbox o /usr e o do runtime.
+# Este script usa flatpak-spawn --host para executar o venv do projeto no host.
+#
+# Requer a permissao org.freedesktop.Flatpak no Flatpak do PyCharm:
+#   flatpak override --user --talk-name=org.freedesktop.Flatpak com.jetbrains.PyCharm-Professional
+
+DIR="$(cd "$(dirname "$0")" && pwd)"
+
+if [ -x "$DIR/.venv-host/bin/python" ]; then
+    PYTHON="$DIR/.venv-host/bin/python"
+elif [ -x "$DIR/.venv/bin/python" ]; then
+    PYTHON="$DIR/.venv/bin/python"
+else
+    PYTHON="python3"
+fi
+
+exec flatpak-spawn --host --directory="$DIR" "$PYTHON" "$@"
